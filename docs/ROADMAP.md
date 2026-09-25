@@ -12,6 +12,11 @@ The public roadmap concerns the generic framework only.
 - static kernel configuration preflight;
 - deterministic bounded scheduler and trace-event receipts;
 - typed, target-neutral SMC routing with declared side-effect capabilities;
+- deterministic logical-time scheduling with explicit event phases;
+- sparse packet/completion/explicit-sync DMA visibility models;
+- multi-boot reset, retention, and staged-persistence contracts;
+- monotonic OTP/fuse authorization models with first-class unknown outcomes;
+- exhaustive three-valued hardware-contract matrices;
 - synthetic unit and CI controls.
 
 ## Next framework milestones

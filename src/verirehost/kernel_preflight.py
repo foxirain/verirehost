@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from . import __version__
 from .canonical import sha256_bytes
 from .receipt import seal
 
@@ -44,7 +45,7 @@ def inspect(config_path: Path, target: dict[str, Any] | None = None) -> dict[str
     return seal(
         {
             "kind": "kernel_static_preflight",
-            "tool": {"name": "verirehost", "version": "0.1.0"},
+            "tool": {"name": "verirehost", "version": __version__},
             "target": target or {"family": "unspecified"},
             "claim_grade": "static_artifact",
             "status": "compatible" if passed else "incompatible",

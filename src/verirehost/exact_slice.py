@@ -5,6 +5,7 @@ import struct
 from pathlib import Path
 from typing import Any
 
+from . import __version__
 from .errors import RehostError
 from .receipt import seal
 
@@ -180,7 +181,7 @@ def run_exact_slice(
     return seal(
         {
             "kind": "bounded_exact_aarch64_slice",
-            "tool": {"name": "verirehost", "version": "0.1.0"},
+            "tool": {"name": "verirehost", "version": __version__},
             "target": target,
             "claim_grade": "exact_binary_slice",
             "status": "stop_reached",

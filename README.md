@@ -21,6 +21,11 @@ The repository provides:
 - a typed, fail-closed SMC router with explicit OTP/fuse side-effect capabilities;
 - AArch64 reference-discovery helpers;
 - deterministic bounded state-space exploration with shortest witnesses;
+- a logical-time scheduler with explicit device/DMA/coherence/reset phases;
+- sparse-window DMA models with packet, completion, and explicit-sync visibility;
+- multi-boot volatile, retention, staged, and committed state modeling;
+- monotonic OTP/fuse policy models that preserve unknown as unknown;
+- exhaustive three-valued hardware-contract policy matrices;
 - a small GDB Remote Serial Protocol client for supervised rehosts;
 - static kernel-configuration preflight for a generic QEMU USB lane;
 - synthetic tests that contain no vendor firmware, target addresses, or device
@@ -112,6 +117,14 @@ Explore every reachable state in a target-neutral synthetic model:
 The resulting receipt distinguishes an exhausted state space from a depth or
 state-budget stop. An unreached goal is never treated as impossible after an
 incomplete search.
+
+For hardware-dependent boundaries, private adapters can compose
+`verirehost.temporal`, `verirehost.dma`, `verirehost.platform_state`,
+`verirehost.otp`, and `verirehost.contract_matrix`. The DMA model keeps device
+and CPU views separate; the reset model distinguishes staged from committed
+state; and the policy matrix evaluates `true`, `false`, and `unknown` without
+promoting uncertainty to safety. See
+[Temporal hardware contracts](docs/HARDWARE_CONTRACTS.md).
 
 ## Claim grades
 

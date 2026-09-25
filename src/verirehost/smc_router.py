@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import Any
 
+from . import __version__
 from .errors import RehostError
 from .receipt import seal
 
@@ -199,7 +200,7 @@ class SmcRouter:
         return seal(
             {
                 "kind": "typed_smc_service_model",
-                "tool": {"name": "verirehost", "version": "0.1.0"},
+                "tool": {"name": "verirehost", "version": __version__},
                 "target": target,
                 "claim_grade": "synthetic_model",
                 "status": "complete",

@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 - 2026-09-26
+
+- Added bounded logical-time scheduling with explicit event phases.
+- Added sparse-window DMA visibility and active-reset models.
+- Added multi-boot volatile, retention, staged, and committed state domains.
+- Added monotonic OTP/fuse policy modeling with explicit unknown decisions.
+- Added exhaustive three-valued hardware-contract policy matrices.
+- Centralized receipt tool versions on the package version.
+- Documented the evidence ceiling between a contract and physical hardware.
 
 - Separated the public generic framework from private target research.
 - Added a target-neutral bounded AArch64 exact-slice runner.

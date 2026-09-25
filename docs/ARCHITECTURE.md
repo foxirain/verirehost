@@ -75,6 +75,23 @@ does not establish that an atom corresponds to real DMA visibility, timing,
 reset, firmware, or hardware behavior. Product semantics and exact evidence
 bindings remain in the private integration layer.
 
+## Temporal hardware-contract lane
+
+The logical-time scheduler orders device, DMA, coherence, interrupt, software,
+and reset events without claiming cycle accuracy. The DMA model separates
+device and CPU memory views and supports packet-visible, completion-visible,
+and explicit-sync policies over a bounded leading window. Descriptor chains,
+completion causes, active-transfer reset, and trace budgets fail closed.
+
+The platform-state model separates volatile, retention, staged persistence,
+committed persistence, and boot-mode reentry. The monotonic-state model keeps
+allow, deny, and unknown authorization distinct and rejects bit clearing.
+
+The contract-matrix engine exhausts a finite product of caller-declared policy
+variants. It reports true, false, and unknown outcomes, necessary variants
+among successful rows, and influential axes. Exhausting a modeled policy
+matrix does not establish which policy a physical platform implements.
+
 ## Receipt layer
 
 Receipts use canonical JSON and a content ID computed over all material fields.
@@ -91,6 +108,7 @@ integrity of the record, not correctness of the experimenter's model.
 | Typed SMC router | Unique dispatch and declared modeled effects | Vendor monitor logic or physical OTP/fuse state |
 | Kernel preflight | Static configuration capability | Successful boot or driver behavior |
 | Deterministic state-space explorer | Reachability within declared transitions | Physical scheduling, timing, DMA, or reset behavior |
+| Temporal hardware contracts | Consequences of declared DMA, reset, reentry, and irreversible-state policies | Which policy physical hardware implements |
 | Receipt content ID | Detecting post-seal mutation | Truth of assumptions or security impact |
 
 ## Private integration boundary

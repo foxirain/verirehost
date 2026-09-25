@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
+from . import __version__
 from .canonical import sha256_object
 from .errors import RehostError
 from .receipt import seal
@@ -297,7 +298,7 @@ def explore(
     return seal(
         {
             "kind": "deterministic_state_space_exploration",
-            "tool": {"name": "verirehost", "version": "0.1.0"},
+            "tool": {"name": "verirehost", "version": __version__},
             "target": {"id": model_id, "kind": "abstract_state_machine"},
             "claim_grade": "synthetic_model",
             "status": "complete" if complete else "budget_exhausted",

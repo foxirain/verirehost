@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path
 from typing import Any
 
+from . import __version__
 from .canonical import sha256_bytes
 from .errors import RehostError
 from .receipt import seal
@@ -32,7 +33,7 @@ def bind(profile: dict[str, Any], profile_bytes: bytes, role: str, path: Path) -
     return seal(
         {
             "kind": "artifact_binding",
-            "tool": {"name": "verirehost", "version": "0.1.0"},
+            "tool": {"name": "verirehost", "version": __version__},
             "profile_id": profile["id"],
             "target": profile["target"],
             "claim_grade": "static_artifact",
