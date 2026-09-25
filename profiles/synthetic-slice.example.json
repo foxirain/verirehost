@@ -1,0 +1,19 @@
+{
+  "schema": "verirehost/profile/v1",
+  "id": "synthetic-aarch64-slice",
+  "target": {
+    "architecture": "aarch64",
+    "family": "synthetic"
+  },
+  "artifacts": {
+    "firmware": {
+      "redistributable": true,
+      "sha256": "9f64a747e1b97f131fabb6b447296c9b6f0201e79fb3c5356e6c77e89b6a806a",
+      "size": 4
+    }
+  },
+  "claim_grade": "synthetic_model",
+  "adaptations": [
+    "example metadata only; no vendor artifact or target-specific address is included"
+  ]
+}

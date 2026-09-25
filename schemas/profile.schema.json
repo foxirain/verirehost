@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/verirehost/profile.schema.json",
+  "title": "VeriRehost profile",
+  "type": "object",
+  "required": [
+    "schema",
+    "id",
+    "target",
+    "claim_grade",
+    "adaptations"
+  ],
+  "properties": {
+    "schema": {"const": "verirehost/profile/v1"},
+    "id": {"type": "string", "minLength": 1},
+    "target": {"type": "object"},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["sha256", "size"],
+        "properties": {
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "size": {"type": "integer", "minimum": 1},
+          "redistributable": {"type": "boolean"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "claim_grade": {
+      "enum": [
+        "static_artifact",
+        "synthetic_model",
+        "exact_binary_slice",
+        "exact_binary_slice_with_service_model",
+        "exact_artifact_host_cryptographic_check",
+        "compatible_kernel",
+        "exact_kernel",
+        "physical_device"
+      ]
+    },
+    "adaptations": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "additionalProperties": true
+}

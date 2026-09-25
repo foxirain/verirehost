@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/verirehost/receipt.schema.json",
+  "title": "VeriRehost receipt",
+  "type": "object",
+  "required": [
+    "schema",
+    "kind",
+    "tool",
+    "content_id"
+  ],
+  "properties": {
+    "schema": {
+      "const": "verirehost/receipt/v1"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tool": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"const": "verirehost"},
+        "version": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "content_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "claim_grade": {
+      "enum": [
+        "static_artifact",
+        "synthetic_model",
+        "exact_binary_slice",
+        "compatible_kernel",
+        "exact_kernel",
+        "physical_device"
+      ]
+    },
+    "adaptations": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+out/
+private/
+vendor/
+*.bin
+*.img
+*.lz4
+*.tar
+*.tar.md5
