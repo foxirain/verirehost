@@ -18,6 +18,7 @@ The repository provides:
 - content-addressed, path-free experiment receipts;
 - profiles that bind private artifacts by SHA-256 and byte length;
 - a fail-closed AArch64 exact-slice runner with instruction and memory bounds;
+- a typed, fail-closed SMC router with explicit OTP/fuse side-effect capabilities;
 - AArch64 reference-discovery helpers;
 - deterministic bounded state-space exploration with shortest witnesses;
 - a small GDB Remote Serial Protocol client for supervised rehosts;
@@ -84,6 +85,12 @@ Run a bounded straight AArch64 slice:
 
 The generic runner exposes no service hooks, storage backend, transport, or
 MMIO model. A branch outside the declared interval is an error.
+
+Private integrations can route an intercepted SMC through
+`verirehost.smc_router`. Each backend declares its function-ID match and every
+side-effect class it can model. Unknown or ambiguous services and undeclared
+OTP/fuse effects are errors; a synthetic backend never counts as physical
+secure-monitor evidence.
 
 Run a static kernel transport preflight:
 

@@ -9,6 +9,8 @@
   from the public snapshot.
 - Added deterministic bounded state-space exploration with explicit budget
   exhaustion, shortest witnesses, and a synthetic control fixture.
+- Added a typed fail-closed SMC router with capability-checked OTP, fuse,
+  persistence, MMIO, and reset side effects.
 
 ## 0.1.0
 

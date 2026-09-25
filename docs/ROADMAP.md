@@ -11,12 +11,13 @@ The public roadmap concerns the generic framework only.
 - AArch64 reference-discovery helpers;
 - static kernel configuration preflight;
 - deterministic bounded scheduler and trace-event receipts;
+- typed, target-neutral SMC routing with declared side-effect capabilities;
 - synthetic unit and CI controls.
 
 ## Next framework milestones
 
 - declarative multiple permitted-code intervals;
-- typed, target-neutral service-hook interfaces;
+- composition of exact slices with typed service hooks;
 - receipt comparison and control-matrix reporting;
 - portable engine capability discovery;
 - stronger schema validation at CLI boundaries.

@@ -44,6 +44,19 @@ references without imposing target semantics. Static observations receive a
 `static_artifact` grade; finding an instruction or reference is not execution
 evidence.
 
+## Typed SMC service-model lane
+
+The public SMC router gives private exact-slice integrations an explicit
+boundary for secure-monitor calls. A backend matches a declared function-ID
+mask, advertises every kind of side effect it can model, and returns a typed
+register response. Unknown IDs, overlapping matches, and undeclared effects
+fail closed. OTP and fuse effects are distinct capabilities so that a generic
+success return cannot silently stand in for irreversible hardware state.
+
+The router receipt is a `synthetic_model` record. It proves routing and
+capability enforcement in the declared model only; it does not promote a
+modeled secure service to exact firmware or physical-device evidence.
+
 ## Kernel-preflight lane
 
 The preflight command evaluates a kernel configuration for a generic QEMU PCI
@@ -75,6 +88,7 @@ integrity of the record, not correctness of the experimenter's model.
 | Public synthetic inputs | Parser and orchestration tests | Vendor behavior |
 | Private artifact binding | Digest and length identity | Provenance or redistribution rights |
 | Exact-slice engine | Instructions inside the declared interval | Whole-firmware or device behavior |
+| Typed SMC router | Unique dispatch and declared modeled effects | Vendor monitor logic or physical OTP/fuse state |
 | Kernel preflight | Static configuration capability | Successful boot or driver behavior |
 | Deterministic state-space explorer | Reachability within declared transitions | Physical scheduling, timing, DMA, or reset behavior |
 | Receipt content ID | Detecting post-seal mutation | Truth of assumptions or security impact |
