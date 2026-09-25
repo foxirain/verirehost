@@ -1,0 +1,40 @@
+{
+  "schema": "verirehost/state-space-scenario/v1",
+  "id": "synthetic-interlock",
+  "initial_atoms": ["ready"],
+  "transitions": [
+    {
+      "name": "review",
+      "requires": ["ready"],
+      "forbids": [],
+      "adds": ["reviewed"],
+      "removes": []
+    },
+    {
+      "name": "publish",
+      "requires": ["reviewed"],
+      "forbids": [],
+      "adds": ["published"],
+      "removes": []
+    }
+  ],
+  "goals": [
+    {
+      "name": "published",
+      "requires": ["published"],
+      "forbids": []
+    }
+  ],
+  "forbidden": [
+    {
+      "name": "unreviewed_publish",
+      "requires": ["published"],
+      "forbids": ["reviewed"]
+    }
+  ],
+  "assumptions": [
+    "All events and atoms are synthetic and carry no product semantics."
+  ],
+  "max_depth": 8,
+  "max_states": 64
+}

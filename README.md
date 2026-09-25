@@ -19,6 +19,7 @@ The repository provides:
 - profiles that bind private artifacts by SHA-256 and byte length;
 - a fail-closed AArch64 exact-slice runner with instruction and memory bounds;
 - AArch64 reference-discovery helpers;
+- deterministic bounded state-space exploration with shortest witnesses;
 - a small GDB Remote Serial Protocol client for supervised rehosts;
 - static kernel-configuration preflight for a generic QEMU USB lane;
 - synthetic tests that contain no vendor firmware, target addresses, or device
@@ -92,6 +93,18 @@ Run a static kernel transport preflight:
   --model synthetic-arm64 --build lab-v1 \
   --output out/preflight/kernel.json
 ```
+
+Explore every reachable state in a target-neutral synthetic model:
+
+```bash
+.venv/bin/python -m verirehost explore-state-space \
+  profiles/synthetic-state-space.example.json \
+  --output out/state-space/synthetic.json
+```
+
+The resulting receipt distinguishes an exhausted state space from a depth or
+state-budget stop. An unreached goal is never treated as impossible after an
+incomplete search.
 
 ## Claim grades
 

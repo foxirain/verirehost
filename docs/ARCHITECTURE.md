@@ -50,6 +50,18 @@ The preflight command evaluates a kernel configuration for a generic QEMU PCI
 xHCI and USB-mass-storage lane. It emits static capability evidence only. A
 compatible configuration is not evidence that a kernel booted.
 
+## Deterministic state-space lane
+
+The state-space explorer executes target-neutral transition declarations over
+sets of uninterpreted atoms. Breadth-first search records the shortest witness
+for each reached goal or forbidden predicate. Transition order is normalized,
+states are deduplicated, and depth/state budget exhaustion is explicit.
+
+The scheduler proves reachability only inside the declared abstract model. It
+does not establish that an atom corresponds to real DMA visibility, timing,
+reset, firmware, or hardware behavior. Product semantics and exact evidence
+bindings remain in the private integration layer.
+
 ## Receipt layer
 
 Receipts use canonical JSON and a content ID computed over all material fields.
@@ -64,6 +76,7 @@ integrity of the record, not correctness of the experimenter's model.
 | Private artifact binding | Digest and length identity | Provenance or redistribution rights |
 | Exact-slice engine | Instructions inside the declared interval | Whole-firmware or device behavior |
 | Kernel preflight | Static configuration capability | Successful boot or driver behavior |
+| Deterministic state-space explorer | Reachability within declared transitions | Physical scheduling, timing, DMA, or reset behavior |
 | Receipt content ID | Detecting post-seal mutation | Truth of assumptions or security impact |
 
 ## Private integration boundary

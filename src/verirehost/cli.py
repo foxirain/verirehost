@@ -11,6 +11,7 @@ from .exact_slice import run_exact_slice
 from .kernel_preflight import inspect
 from .profile import load
 from .receipt import read, verify, write
+from .state_space import explore_scenario, load_scenario
 
 
 def project_root() -> Path:
@@ -79,6 +80,13 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.add_argument("--output", type=Path, required=True)
     preflight.add_argument("--model", default="unspecified")
     preflight.add_argument("--build", default="unspecified")
+
+    state_space = sub.add_parser(
+        "explore-state-space",
+        help="exhaustively explore a bounded abstract transition model",
+    )
+    state_space.add_argument("scenario", type=Path)
+    state_space.add_argument("--output", type=Path, required=True)
     return parser
 
 
@@ -174,6 +182,22 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
             return 0 if value["status"] == "compatible" else 1
+
+        if args.command == "explore-state-space":
+            value = explore_scenario(load_scenario(args.scenario))
+            write(args.output, value)
+            print(
+                json.dumps(
+                    {
+                        "status": value["status"],
+                        "output": str(args.output),
+                        "content_id": value["content_id"],
+                        "complete": value["exploration"]["complete"],
+                    },
+                    sort_keys=True,
+                )
+            )
+            return 0 if value["exploration"]["complete"] else 1
 
         raise AssertionError(f"unhandled command: {args.command}")
     except RehostError as exc:

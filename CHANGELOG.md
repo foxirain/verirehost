@@ -7,6 +7,8 @@
 - Reduced public profiles and CI fixtures to synthetic metadata.
 - Removed product-, build-, boot-chain-, and vulnerability-specific material
   from the public snapshot.
+- Added deterministic bounded state-space exploration with explicit budget
+  exhaustion, shortest witnesses, and a synthetic control fixture.
 
 ## 0.1.0
 
