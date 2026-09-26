@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="docs/assets/verirehost-gw-takedown-banner.svg" alt="VeriRehost — the secure-boot evidence rehosting track of the GW TakeDown research program" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/assets/verirehost-watch-architecture-map.svg" alt="Conceptual wearable architecture map showing VeriRehost at the bootloader and verified-boot decision layer" width="100%">
+</p>
+
 # VeriRehost
 
 VeriRehost is an evidence-first framework for small, bounded firmware

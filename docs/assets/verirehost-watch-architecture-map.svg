@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Wearable watch architecture map showing where VeriRehost operates</title>
+  <desc id="desc">A conceptual cutaway of a wearable watch highlights the application-processor boot-control path. A logical zoom shows VeriRehost at the vendor-bootloader and verified-boot decision layer, with storage, USB and DMA, and secure-monitor services treated as explicit boundaries rather than fully emulated hardware.</desc>
+
+  <rect width="1280" height="640" fill="#0a0c0f"/>
+  <path d="M0 1H1280M0 639H1280" stroke="#262b31"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="48" y="52" fill="#64e8c8" font-size="13" font-weight="700" letter-spacing="2.2">WATCH ARCHITECTURE MAP</text>
+    <text x="279" y="52" fill="#82909f" font-size="11" letter-spacing="1.35">/  WHERE VERIREHOST SITS</text>
+
+    <path d="M866 46H894" stroke="#64e8c8" stroke-width="3"/>
+    <text x="906" y="51" fill="#9aa5b1" font-size="11" letter-spacing="1.1">CORE SCOPE</text>
+    <path d="M1008 46H1036" stroke="#e5e9ed" stroke-width="2"/>
+    <text x="1048" y="51" fill="#9aa5b1" font-size="11" letter-spacing="1.1">BOUNDARY</text>
+    <path d="M1149 46H1177" stroke="#59636e" stroke-dasharray="5 5"/>
+    <text x="1189" y="51" fill="#9aa5b1" font-size="11" letter-spacing="1.1">CONTEXT</text>
+  </g>
+
+  <path d="M48 88H1232" stroke="#262b31"/>
+  <path d="M460 112V584" stroke="#262b31"/>
+
+  <!-- Conceptual physical placement -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="48" y="119" fill="#65717d" font-size="10" font-weight="600" letter-spacing="1.7">01 / PHYSICAL POSITION</text>
+    <text x="48" y="138" fill="#82909f" font-size="9" letter-spacing="1.15">CONCEPTUAL PLACEMENT — NOT PCB SCALE</text>
+  </g>
+
+  <g fill="none" stroke-linejoin="round">
+    <path d="M169 173V143C169 129 180 118 194 118H286C300 118 311 129 311 143V173" stroke="#4b545f" stroke-width="2"/>
+    <path d="M169 493V523C169 537 180 548 194 548H286C300 548 311 537 311 523V493" stroke="#4b545f" stroke-width="2"/>
+    <rect x="72" y="173" width="336" height="320" rx="78" stroke="#d8dde3" stroke-width="2"/>
+    <rect x="96" y="197" width="288" height="272" rx="58" fill="#0d1013" stroke="#30363d" stroke-width="2"/>
+    <path d="M408 259H421V317H408" stroke="#d8dde3" stroke-width="2"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="120" y="228" fill="#65717d" font-size="10" letter-spacing="1.45">WATCH MAINBOARD</text>
+
+    <rect x="120" y="250" width="240" height="104" rx="3" fill="#101815" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M136 266H344M136 338H344" stroke="#1f443b"/>
+    <text x="140" y="287" fill="#82909f" font-size="10" letter-spacing="1.35">APPLICATION PROCESSOR</text>
+    <text x="140" y="315" fill="#f3f5f7" font-size="14" font-weight="700" letter-spacing="0.8">BOOT CONTROL PATH</text>
+    <text x="140" y="334" fill="#64e8c8" font-size="9" letter-spacing="1.0">VERIREHOST ZOOM TARGET</text>
+
+    <rect x="120" y="382" width="108" height="52" fill="#0a0c0f" stroke="#e5e9ed" stroke-width="2"/>
+    <text x="136" y="405" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.0">STORAGE</text>
+    <text x="136" y="421" fill="#65717d" font-size="8" letter-spacing="0.8">BOOT ARTIFACTS</text>
+
+    <rect x="252" y="382" width="108" height="52" fill="#0a0c0f" stroke="#e5e9ed" stroke-width="2"/>
+    <text x="268" y="405" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.0">USB / I/O</text>
+    <text x="268" y="421" fill="#65717d" font-size="8" letter-spacing="0.8">DEVICE BOUNDARY</text>
+  </g>
+
+  <g fill="none" stroke-linecap="square">
+    <path d="M174 382V367H202V354" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M306 382V367H278V354" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M360 302H438" stroke="#64e8c8" stroke-width="2"/>
+    <path d="m431 296 7 6-7 6" stroke="#64e8c8" stroke-width="2"/>
+  </g>
+
+  <!-- Logical zoom -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="500" y="119" fill="#65717d" font-size="10" font-weight="600" letter-spacing="1.7">02 / LOGICAL ZOOM</text>
+    <text x="500" y="138" fill="#82909f" font-size="9" letter-spacing="1.15">POWER-ON  →  TRUST DECISION  →  KERNEL HANDOFF</text>
+  </g>
+
+  <g fill="none" stroke-linecap="square" stroke-linejoin="round">
+    <rect x="500" y="171" width="94" height="58" stroke="#59636e" stroke-dasharray="5 5"/>
+    <path d="M594 200H612" stroke="#59636e" stroke-dasharray="5 5"/>
+    <path d="m606 195 6 5-6 5" stroke="#59636e"/>
+
+    <rect x="612" y="171" width="94" height="58" stroke="#59636e" stroke-dasharray="5 5"/>
+    <path d="M706 200H724" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="m718 195 6 5-6 5" stroke="#e5e9ed" stroke-width="2"/>
+
+    <rect x="724" y="163" width="112" height="74" fill="#101815" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M836 200H854" stroke="#64e8c8" stroke-width="2"/>
+    <path d="m848 195 6 5-6 5" stroke="#64e8c8" stroke-width="2"/>
+
+    <rect x="854" y="163" width="126" height="74" fill="#101815" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M980 200H998" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="m992 195 6 5-6 5" stroke="#e5e9ed" stroke-width="2"/>
+
+    <rect x="998" y="171" width="94" height="58" stroke="#59636e" stroke-dasharray="5 5"/>
+    <path d="M1092 200H1110" stroke="#59636e" stroke-dasharray="5 5"/>
+    <path d="m1104 195 6 5-6 5" stroke="#59636e"/>
+
+    <rect x="1110" y="171" width="94" height="58" stroke="#59636e" stroke-dasharray="5 5"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" text-anchor="middle">
+    <text x="547" y="195" fill="#9aa5b1" font-size="9" font-weight="700" letter-spacing="0.9">POWER /</text>
+    <text x="547" y="211" fill="#9aa5b1" font-size="9" font-weight="700" letter-spacing="0.9">RESET</text>
+    <text x="659" y="204" fill="#9aa5b1" font-size="10" font-weight="700" letter-spacing="1.0">BOOT ROM</text>
+    <text x="780" y="194" fill="#f3f5f7" font-size="10" font-weight="700" letter-spacing="0.7">BOOTLOADER</text>
+    <text x="780" y="214" fill="#64e8c8" font-size="8" letter-spacing="0.9">EXACT SLICES</text>
+    <text x="917" y="194" fill="#f3f5f7" font-size="10" font-weight="700" letter-spacing="0.7">VERIFIED BOOT</text>
+    <text x="917" y="214" fill="#64e8c8" font-size="8" letter-spacing="0.9">BOOT DECISION</text>
+    <text x="1045" y="204" fill="#9aa5b1" font-size="10" font-weight="700" letter-spacing="1.0">KERNEL</text>
+    <text x="1157" y="204" fill="#9aa5b1" font-size="10" font-weight="700" letter-spacing="1.0">WEAR OS</text>
+  </g>
+
+  <!-- External contracts around the exact decision layer -->
+  <g fill="none" stroke-linejoin="round">
+    <rect x="522" y="287" width="184" height="66" stroke="#e5e9ed" stroke-width="2"/>
+    <rect x="742" y="287" width="184" height="66" stroke="#e5e9ed" stroke-width="2"/>
+    <rect x="962" y="287" width="184" height="66" stroke="#e5e9ed" stroke-width="2"/>
+
+    <path d="M614 287V265H888V237" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M834 287V257H780V237" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M1054 287V265H946V237" stroke="#e5e9ed" stroke-width="2"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" text-anchor="middle">
+    <text x="614" y="312" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.0">STORAGE / IMAGES</text>
+    <text x="614" y="333" fill="#65717d" font-size="9" letter-spacing="0.75">ARTIFACT + STATE</text>
+    <text x="834" y="312" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.0">USB / DWC3 / DMA</text>
+    <text x="834" y="333" fill="#65717d" font-size="9" letter-spacing="0.75">I/O + ORDERING</text>
+    <text x="1054" y="312" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.0">EL3 / SMC / OTP</text>
+    <text x="1054" y="333" fill="#65717d" font-size="9" letter-spacing="0.75">SECURE SERVICE</text>
+  </g>
+
+  <!-- Scope explanation -->
+  <path d="M500 394H1204" stroke="#262b31"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <rect x="500" y="423" width="214" height="103" fill="#101815" stroke="#64e8c8" stroke-width="2"/>
+    <text x="518" y="449" fill="#64e8c8" font-size="10" font-weight="700" letter-spacing="1.25">CORE / EXECUTED</text>
+    <text x="518" y="474" fill="#e5e9ed" font-size="11">Hash-bound bootloader code</text>
+    <text x="518" y="493" fill="#e5e9ed" font-size="11">AVB + selection decisions</text>
+    <text x="518" y="512" fill="#e5e9ed" font-size="11">Sealed evidence receipts</text>
+
+    <rect x="734" y="423" width="214" height="103" stroke="#e5e9ed" stroke-width="2"/>
+    <text x="752" y="449" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.25">BOUNDARY / MODELLED</text>
+    <text x="752" y="474" fill="#9aa5b1" font-size="11">Storage and reset policy</text>
+    <text x="752" y="493" fill="#9aa5b1" font-size="11">DMA visibility and order</text>
+    <text x="752" y="512" fill="#9aa5b1" font-size="11">SMC and OTP contracts</text>
+
+    <rect x="968" y="423" width="236" height="103" stroke="#59636e" stroke-dasharray="5 5"/>
+    <text x="986" y="449" fill="#82909f" font-size="10" font-weight="700" letter-spacing="1.25">CONTEXT / NOT CLAIMED</text>
+    <text x="986" y="474" fill="#65717d" font-size="11">Full wearable SoC emulation</text>
+    <text x="986" y="493" fill="#65717d" font-size="11">Physical DWC3 or EL3 truth</text>
+    <text x="986" y="512" fill="#65717d" font-size="11">Whole-device boot fidelity</text>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="48" y="596" fill="#65717d" font-size="10" letter-spacing="1.25">POSITION  /  BETWEEN IMMUTABLE BOOT ENTRY AND THE OPERATING-SYSTEM KERNEL HANDOFF</text>
+    <text x="500" y="566" fill="#82909f" font-size="10" letter-spacing="1.1">EXACT CODE WHERE AVAILABLE  /  EXPLICIT CONTRACTS AT EVERY EXTERNAL EDGE  /  UNKNOWN STAYS UNKNOWN</text>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">VeriRehost — secure-boot research within GW TakeDown</title>
+  <desc id="desc">A restrained technical banner connecting the GW TakeDown research program to its secure-boot track and VeriRehost, showing hash-bound original code and an explicit environment model converging into a sealed evidence receipt.</desc>
+
+  <rect width="1280" height="360" fill="#0a0c0f"/>
+  <path d="M0 1H1280M0 359H1280" stroke="#262b31"/>
+  <path d="M48 48V312" stroke="#64e8c8" stroke-width="3"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="82" y="66" fill="#82909f" font-size="13" font-weight="600" letter-spacing="2.2">GW TAKE DOWN  /  SECURE-BOOT RESEARCH</text>
+    <text x="82" y="306" fill="#82909f" font-size="12" letter-spacing="1.35">BIND  /  EXECUTE  /  MODEL  /  RECEIPT</text>
+  </g>
+
+  <g font-family="Inter, Helvetica Neue, Helvetica, Arial, sans-serif">
+    <text x="78" y="169" fill="#f3f5f7" font-size="76" font-weight="700" letter-spacing="-3.5">Veri</text>
+    <text x="218" y="169" fill="#64e8c8" font-size="76" font-weight="700" letter-spacing="-3.5">Rehost</text>
+    <text x="82" y="212" fill="#b2bac4" font-size="20" font-weight="400" letter-spacing="0.1">Evidence-preserving rehosting for proprietary boot chains</text>
+  </g>
+
+  <path d="M640 48V312" stroke="#262b31"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="684" y="66" fill="#65717d" font-size="11" font-weight="600" letter-spacing="1.7">PROJECT POSITION</text>
+
+    <text x="684" y="105" fill="#d8dde3" font-size="12" font-weight="600" letter-spacing="1.15">GW TAKE DOWN</text>
+    <path d="M792 101H824" stroke="#4b545f"/>
+    <path d="m819 97 5 4-5 4" fill="none" stroke="#4b545f"/>
+    <text x="838" y="105" fill="#d8dde3" font-size="12" font-weight="600" letter-spacing="1.15">BOOT TRUST</text>
+    <path d="M932 101H974" stroke="#4b545f"/>
+    <path d="m969 97 5 4-5 4" fill="none" stroke="#4b545f"/>
+    <text x="988" y="105" fill="#64e8c8" font-size="12" font-weight="700" letter-spacing="1.15">VERIREHOST</text>
+
+    <text x="684" y="151" fill="#687481" font-size="10" letter-spacing="1.35">HASH-BOUND ORIGINAL CODE</text>
+    <text x="684" y="286" fill="#687481" font-size="10" letter-spacing="1.35">EXPLICIT ENVIRONMENT MODEL</text>
+  </g>
+
+  <g fill="none" stroke-linecap="square" stroke-linejoin="round">
+    <rect x="684" y="171" width="112" height="54" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M796 198H826" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="m819 192 7 6-7 6" stroke="#e5e9ed" stroke-width="2"/>
+    <rect x="826" y="171" width="126" height="54" stroke="#e5e9ed" stroke-width="2"/>
+
+    <rect x="684" y="247" width="150" height="38" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M834 266H942C968 266 981 253 994 240" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M952 198H964C979 198 987 211 997 225" stroke="#e5e9ed" stroke-width="2"/>
+
+    <circle cx="1006" cy="237" r="18" fill="#0a0c0f" stroke="#64e8c8" stroke-width="2"/>
+    <circle cx="1006" cy="237" r="5" fill="#64e8c8" stroke="none"/>
+
+    <path d="M1024 237H1060" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="m1053 231 7 6-7 6" stroke="#e5e9ed" stroke-width="2"/>
+    <rect x="1060" y="208" width="144" height="58" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M1188 208V223H1204" stroke="#64e8c8" stroke-width="2"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="700" y="193" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.15">ARTIFACT</text>
+    <text x="700" y="211" fill="#65717d" font-size="9" letter-spacing="0.75">SHA-256 / SIZE</text>
+
+    <text x="842" y="193" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.15">EXACT SLICE</text>
+    <text x="842" y="211" fill="#65717d" font-size="9" letter-spacing="0.75">BOUNDED EXECUTION</text>
+
+    <text x="700" y="271" fill="#64e8c8" font-size="10" font-weight="700" letter-spacing="1.05">DECLARED SERVICES</text>
+    <text x="971" y="278" fill="#82909f" font-size="9" letter-spacing="1.0">BOUNDARY</text>
+
+    <text x="1076" y="232" fill="#d8dde3" font-size="10" font-weight="700" letter-spacing="1.15">SEALED RECEIPT</text>
+    <text x="1076" y="250" fill="#65717d" font-size="9" letter-spacing="0.75">CLAIM + LIMITS</text>
+  </g>
+</svg>
