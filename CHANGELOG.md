@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1 - 2026-09-28
+
+- Bound normalized declared and effective initial register state into exact-slice
+  receipts so distinct experiment inputs cannot collapse to one content ID.
+- Made supported general-purpose-register and `NZCV` initialization explicit
+  and rejected duplicate aliases and caller-supplied `PC` values fail-closed.
+- Added a redistributable public AArch64 exact-slice demo covering input,
+  artifact binding, execution, receipt verification, result, and interpretation.
+
 ## 0.2.0 - 2026-09-26
 
 - Added bounded logical-time scheduling with explicit event phases.

@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If this artifact helps your research, cite the software and the immutable receipt content IDs used in your experiment."
 title: "VeriRehost"
 type: software
-version: 0.2.0
-date-released: 2026-09-26
+version: 0.2.1
+date-released: 2026-09-28
 authors:
   - name: "VeriRehost contributors"
 license: Apache-2.0

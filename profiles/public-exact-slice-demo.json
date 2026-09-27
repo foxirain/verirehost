@@ -1,0 +1,35 @@
+{
+  "schema": "verirehost/profile/v1",
+  "id": "public-aarch64-add-one",
+  "target": {
+    "architecture": "aarch64",
+    "family": "synthetic"
+  },
+  "artifacts": {
+    "firmware": {
+      "redistributable": true,
+      "sha256": "7d6b27454daefef3213815bf066fe4c047cf4e8d290f4ef38f03dd895f72fab7",
+      "size": 8
+    }
+  },
+  "claim_grade": "synthetic_model",
+  "experiment": {
+    "image_base": 1048576,
+    "entry": 1048576,
+    "stop_exclusive": 1048584,
+    "stack_base": 2097152,
+    "stack_size": 4096,
+    "max_instructions": 8,
+    "initial_registers": {
+      "x0": 41
+    },
+    "expected_final_registers": {
+      "x0": 42
+    }
+  },
+  "adaptations": [
+    "the redistributable input contains only add x0, x0, #1 followed by nop",
+    "the demo models x0 as 41 and a zero-initialized bounded stack",
+    "no vendor firmware, device service, MMIO, transport, or physical hardware is present"
+  ]
+}

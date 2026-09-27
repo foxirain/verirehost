@@ -64,29 +64,65 @@ disclosure process.
 python -m venv .venv
 .venv/bin/pip install -e '.[exact]'
 make check PYTHON=.venv/bin/python
+make demo-exact PYTHON=.venv/bin/python
 ```
 
-Validate generic experiment metadata:
+## Public end-to-end example
+
+The repository includes a redistributable eight-byte AArch64 input containing
+`add x0, x0, #1; nop`. The public demo binds that input to its profile, starts
+with `x0=41`, executes the bounded slice, verifies both sealed receipts, checks
+that the final value is `x0=42`, and emits an interpretation that states the
+claim boundary.
 
 ```bash
-.venv/bin/python -m verirehost validate-profile \
-  profiles/synthetic-slice.example.json
+make demo-exact PYTHON=.venv/bin/python
 ```
 
-Bind a locally obtained private artifact without putting its path in the
-receipt:
+The complete flow is inspectable without private inputs:
+
+1. **Input:** `fixtures/synthetic/aarch64-add-one.hex` and
+   `profiles/public-exact-slice-demo.json`.
+2. **Execution:** the hash-bound bytes run from the declared entry to the
+   exclusive stop under the recorded initial state.
+3. **Result:** `out/public-exact-slice/exact-slice.json` records the trace
+   digests, initial state, and final registers.
+4. **Interpretation:** `out/public-exact-slice/summary.json` explains what the
+   observation supports and explicitly excludes vendor-firmware and
+   physical-device claims.
+
+Verify the generated receipts again at any time:
 
 ```bash
+.venv/bin/python -m verirehost verify-receipt \
+  out/public-exact-slice/binding.json \
+  out/public-exact-slice/exact-slice.json
+```
+
+Changing a declared initial register changes the exact-slice content ID even
+when the instruction trace and final state happen to be identical. Receipts
+record normalized declared registers, effective `PC`/`SP`/`X29`, the
+zero-initialized unspecified-GPR and `NZCV` policy, and the stack-memory
+initialization policy.
+
+## Private artifact template
+
+For a lawfully obtained local artifact, create a private profile containing
+its SHA-256 digest and byte length, then use `bind-artifact` before executing a
+bounded slice. Local paths and artifact bytes are excluded from sealed
+receipts. A target-specific command is intentionally a template rather than a
+runnable public example:
+
+```bash
+VR_PROFILE=/absolute/path/to/local-profile.json
+VR_FIRMWARE=/absolute/path/to/firmware.bin
+
 .venv/bin/python -m verirehost bind-artifact \
-  profiles/local.example.json firmware private/firmware.bin \
-  --output out/binding.json
-```
+  "$VR_PROFILE" firmware "$VR_FIRMWARE" \
+  --output out/local-binding.json
 
-Run a bounded straight AArch64 slice:
-
-```bash
 .venv/bin/python -m verirehost run-exact-slice \
-  private/firmware.bin \
+  "$VR_FIRMWARE" \
   --target-id local-lab-target \
   --image-base 0x02000000 \
   --entry 0x02001000 \

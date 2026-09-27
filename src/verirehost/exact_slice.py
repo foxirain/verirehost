@@ -33,17 +33,62 @@ def _load_engine() -> tuple[Any, Any, str]:
     return unicorn, (Uc, arm64_const), unicorn.__version__
 
 
-def _register_id(registers: Any, name: str) -> int:
+def _normalize_register_name(name: Any) -> str:
+    if not isinstance(name, str):
+        raise RehostError(
+            "EXACT_REGISTER",
+            "AArch64 register names must be strings",
+            {"register": str(name)},
+        )
     normalized = name.strip().lower()
+    if normalized == "sp":
+        return normalized
+    if normalized == "pc":
+        return normalized
+    if normalized.startswith("x") and normalized[1:].isdigit():
+        number = int(normalized[1:])
+        if 0 <= number <= 30:
+            return normalized
+    raise RehostError("EXACT_REGISTER", "unsupported AArch64 register", {"register": name})
+
+
+def _register_id(registers: Any, name: str) -> int:
+    normalized = _normalize_register_name(name)
     if normalized == "sp":
         return registers.UC_ARM64_REG_SP
     if normalized == "pc":
         return registers.UC_ARM64_REG_PC
-    if normalized.startswith("x") and normalized[1:].isdigit():
-        number = int(normalized[1:])
-        if 0 <= number <= 30:
-            return getattr(registers, f"UC_ARM64_REG_X{number}")
-    raise RehostError("EXACT_REGISTER", "unsupported AArch64 register", {"register": name})
+    return getattr(registers, f"UC_ARM64_REG_X{int(normalized[1:])}")
+
+
+def _normalize_initial_registers(values: dict[str, int] | None) -> dict[str, int]:
+    normalized_values: dict[str, int] = {}
+    for raw_name, value in (values or {}).items():
+        name = _normalize_register_name(raw_name)
+        if name == "pc":
+            raise RehostError(
+                "EXACT_REGISTER",
+                "the initial PC is controlled by the declared entry address",
+                {"register": name},
+            )
+        if name in normalized_values:
+            raise RehostError(
+                "EXACT_REGISTER",
+                "an initial register was declared more than once after normalization",
+                {"register": name},
+            )
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, int)
+            or not 0 <= value <= 0xFFFFFFFFFFFFFFFF
+        ):
+            raise RehostError(
+                "EXACT_REGISTER",
+                "initial register values must be unsigned 64-bit integers",
+                {"register": name},
+            )
+        normalized_values[name] = value
+    return {name: normalized_values[name] for name in sorted(normalized_values)}
 
 
 def run_exact_slice(
@@ -63,6 +108,8 @@ def run_exact_slice(
     The runner has no service hooks, MMIO model, storage backend, or transport.
     Any control-flow escape from the declared slice fails closed.
     """
+
+    declared_registers = _normalize_initial_registers(initial_registers)
 
     if image_base < 0 or image_base % PAGE_SIZE:
         raise RehostError("EXACT_LAYOUT", "image_base must be page aligned")
@@ -113,18 +160,23 @@ def run_exact_slice(
         unicorn.UC_PROT_READ | unicorn.UC_PROT_WRITE,
     )
 
+    for number in range(31):
+        machine.reg_write(getattr(registers, f"UC_ARM64_REG_X{number}"), 0)
+    machine.reg_write(registers.UC_ARM64_REG_NZCV, 0)
+
     stack_pointer = stack_base + stack_size - 16
     machine.reg_write(registers.UC_ARM64_REG_SP, stack_pointer)
     machine.reg_write(registers.UC_ARM64_REG_X29, stack_pointer)
-    declared_registers = initial_registers or {}
     for name, value in declared_registers.items():
-        if not isinstance(value, int) or value < 0 or value > 0xFFFFFFFFFFFFFFFF:
-            raise RehostError(
-                "EXACT_REGISTER",
-                "initial register values must be unsigned 64-bit integers",
-                {"register": name},
-            )
         machine.reg_write(_register_id(registers, name), value)
+
+    effective_registers = dict(declared_registers)
+    effective_registers.setdefault("x29", stack_pointer)
+    effective_registers.setdefault("sp", stack_pointer)
+    effective_registers["pc"] = entry
+    effective_registers = {
+        name: effective_registers[name] for name in sorted(effective_registers)
+    }
 
     executed_addresses: list[int] = []
     executed_bytes = hashlib.sha256()
@@ -196,6 +248,13 @@ def run_exact_slice(
                 "stop_exclusive": stop_exclusive,
                 "stack_base": stack_base,
                 "stack_size": stack_size,
+            },
+            "initial_state": {
+                "declared_registers": declared_registers,
+                "effective_registers": effective_registers,
+                "unspecified_x0_x30": 0,
+                "nzcv": 0,
+                "stack_memory": "zero_initialized",
             },
             "budget": {
                 "maximum_instructions": max_instructions,

@@ -29,6 +29,9 @@ The runner records:
 
 - artifact digest and length;
 - image, entry, stop, and stack layout;
+- normalized declared registers plus the effective `PC`, `SP`, and `X29` state;
+- the zero-initialization policy for unspecified general-purpose registers,
+  `NZCV`, and bounded stack memory;
 - instruction budget and observed count;
 - digests of executed addresses and instruction bytes;
 - final values of the explicitly initialized registers.

@@ -17,6 +17,11 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(synthetic["claim_grade"], "synthetic_model")
         self.assertEqual(synthetic["target"]["architecture"], "aarch64")
 
+        demo, _ = load(PROJECT_ROOT / "profiles" / "public-exact-slice-demo.json")
+        self.assertEqual(demo["claim_grade"], "synthetic_model")
+        self.assertEqual(demo["artifacts"]["firmware"]["size"], 8)
+        self.assertEqual(demo["experiment"]["initial_registers"], {"x0": 41})
+
 
 class KernelPreflightTests(unittest.TestCase):
     def test_usb_lane_does_not_require_virtio_blk(self) -> None:
